@@ -8,11 +8,15 @@ export default {
   name: 'IndexPage',
   amp: 'hybrid',
   ampLayout: 'defaultAmp',
-  data() {
+  data() {  
+    // console.log(process.env.APP_ENV);
     return { products: [] }
   },
   async fetch() {
-    const result = await fetch('https://fakestoreapi.com/products')
+    const result = await fetch('https://dummyjson.com/products')
+    // const result = await fetch('https://dummyjson.com/products/category/smartphones')
+    // const result = await fetch('https://dummyjson.com/products/category/furniture')
+    // const result = await fetch('https://dummyjson.com/products/category/laptops')
     const response = await result.json()
     this.products = response
   },

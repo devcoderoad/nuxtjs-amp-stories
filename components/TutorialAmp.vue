@@ -8,7 +8,7 @@
     :poster-portrait-src="''"
   >
     <amp-story-page
-      v-for="item in items"
+      v-for="item in items.products"
       :key="item.id + item.price"
       auto-advance-after="6s"
     >
@@ -27,19 +27,26 @@
             >{{ item.category }}</a
           >
           <span class="ml-4">$ {{ item.price }}</span>
-          <div class="block my-4">
+          <span class="ml-4">% {{ item.discountPercentage }}</span>
+          <div class="my-4 max-w-md">
             <amp-img
               width="1.33"
               height="1"
               layout="responsive"
-              :src="item.image"
+              :src="item.thumbnail"
               :alt="item.title"
               class="mx-auto text-center"
             />
           </div>
           <p class="mt-4 pt-4 text-gray-800 border-t border-dashed">
-            <slot v-if="item.rating">
-              Rate: {{ item.rating.rate }} Count: {{ item.rating.count }}
+            <slot v-if="item.stock && item.rating">
+              Stock: {{ item.stock }} Rating: {{ item.rating }} Brand:
+              <a
+                href="https://nuxtjs.org"
+                target="_blank"
+                class="button--doc text-blue-500 hover:text-blue-600 border-blue-300 uppercase rounded-xl border text-xs px-2 py-1"
+                >{{ item.brand }}</a
+              >
             </slot>
           </p>
         </div>
@@ -53,8 +60,10 @@ export default {
   name: 'NuxtTutorial',
   props: {
     items: {
-      type: Array,
-      default: () => [],
+      // type: Array,
+      // default: () => [],
+      type: Object,
+      default: () => {},
     },
   },
 }
